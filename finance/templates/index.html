@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block main %}
+    <table class="table" style="table-layout: fixed;">
+        <thead class="thead">
+            <tr>
+                <th scope="col">Cash</th>
+                <th scope="col">Total stock value</th>
+                <th scope="col">Grand total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ cash }}</td>
+                <td>{{ total_stock_value }}</td>
+                <td>{{ grand_total }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table" style="table-layout: fixed;">
+        <thead class="thead">
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Amount of shares</th>
+                <th scope="col">Price of stock</th>
+                <th scope="col">Holding</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for share in shares %}
+            {% if share['shares'] == 0 %}
+
+            {% else %}
+            <tr>
+                <td>{{ share['symbol'] }}</td>
+                <td>{{ share['shares'] }}</td>
+                <td>{{ share['price'] }}</td>
+                <td>{{ share['holding'] }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <form action="/addmoney" method="post">
+        <div class="mb-3">
+            <input autocorrect="off" class="form-control mx-auto w-auto" name="money" placeholder="Amount" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Add money</button>
+    </form>
+{% endblock %}
